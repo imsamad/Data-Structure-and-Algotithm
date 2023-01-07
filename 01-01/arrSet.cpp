@@ -8,6 +8,23 @@ void display(int *arr,int len) {
     cout<<endl;
 }
 
+void intersect(int *arr1,int len1,int *arr2,int len2) {
+    int * res= new int[len1>len2 ? len1 : len2];
+    int i=0,j=0,k=0;
+    while(i<len1 && j<len2) {
+        cout<<i<<" => "<<j<<endl;
+        if(arr1[i] == arr2[j] ){
+            cout<<"executed for "<<i<<" -> "<<j<<endl;
+            res[k]=arr1[i];
+            i++;j++;k++;
+        } else if(arr1[i] < arr2[j] )
+            i++;
+        else j++;    
+    }
+    cout<<"k "<<k<<endl;
+    display(res,k);
+}
+
 void unionSet(int *arr1,int len1,int *arr2,int len2) {
     int i=0,j=0,k=0;
     int * res= new int[len1+len2];
@@ -30,9 +47,10 @@ void unionSet(int *arr1,int len1,int *arr2,int len2) {
 }
 
 int main() {
-    int arr1[5]={10,20,30,40,50};
-    int arr2[5]={60,70,80,90,100};
-    unionSet(arr1,5,arr2,5);
+    int arr1[5]={3,4,5,6,10};
+    int arr2[5]={2,3,6,10,12};
+    // unionSet(arr1,5,arr2,5);
+    intersect(arr1,5,arr2,5);
     
     return 0;
 }
