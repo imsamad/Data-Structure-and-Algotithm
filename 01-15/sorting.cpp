@@ -67,16 +67,68 @@ void selectionSort(int *arr,int len) {
         if(i!=min_idx) swap(arr[min_idx],arr[i]);
     }
 }
+void selectionSortStable(int *arr,int len) {
+    int i,j,min_idx;
+    for(i=0; i<len-1; i++) {
+        for(j=min_idx+1,min_idx=i; j < len; j++)
+            if(arr[j] < arr[min_idx]) min_idx = j;
+
+        int key=arr[min_idx];
+        while(min_idx > i) {
+            arr[min_idx]=arr[min_idx-1];
+            min_idx--;
+        }   
+        arr[i]=key;
+    }
+}
+
+int partitionMy(int * arr,int low,int high) {
+    int pivot=arr[low];
+    int i=low+1,j=high;
+
+    while(i<j) {
+        while(arr[i]<=pivot && i<high)  i++;
+        while(arr[j]>pivot && j<low) j--;
+        if(i<j) swap(arr[i],arr[j]);
+    }
+
+    swap(arr[low],arr[j]);
+    return j;
+}
+
+int partition(int *arr,int low,int high) {
+    int pivot=arr[low],i=low,j=high;
+
+    do {
+        do { i++; } while(arr[i]<=pivot && i<high);
+        do { j--; } while(arr[j]>pivot && j >low);
+        if(i<j) swap(arr[i],arr[j]);
+    } while(i<j);
+
+    swap(arr[low],arr[j]);
+
+    return j;
+}
+
+void QuickSort(int *arr,int l,int h) {
+    if(l < h) {
+    cout<<"l = "<<l<<", h = "<<h<<endl;
+        int j = partition(arr,l,h);
+        QuickSort(arr,l,j);
+        QuickSort(arr,j+1,h);
+    }
+}
 
 int main() {
-    int len=10;
-    int arr[len]={10,212,23,7,6,5,4,3,2,1};
-    // cout<<sizeof(arr)/sizeof(arr[0])<<endl;
-    // int arr[len]={8,6,3,10,9,4,12,5,2,7};
+    // int len=10;
+    // int arr[len]={8,6,8,10,9,4,12,5,2,7};
+    int len=3;
+    int arr[len]={10,30,20};
     // int len=2;
     // int arr[len]={10,2};
     // bubbleRec(arr,len,5);
-    selectionSort(arr,len);
+    // selectionSortStable(arr,len);
+    QuickSort(arr,0,len);
     display(arr,len);
     return 0;
 }
