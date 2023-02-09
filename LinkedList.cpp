@@ -29,6 +29,15 @@ class LL {
         NILL=(T)(NULL);
     }
     Node  <T>* nodeAt(int);
+    bool isEmpty() { return !root; }
+    Node <T> * firstNode(){ return root; }
+    Node <T> * lastNode(){
+        if(!root) return NULL; 
+        Node <T> iNode=root;
+        while(iNode->next) iNode=iNode->next;
+        return iNode;
+
+     }
     void createList(bool isToSort=false,int len=100, bool random=true) {
 
        srand(time(0)); 
@@ -47,14 +56,15 @@ class LL {
         size++;
         return new Node(data,next);
     } 
+
     void insertSort(T);
+    
     bool isSorted();
 
     bool isLoop();
     int lengthOfLoop(bool remove=false);
     Node <T>* loopAt();
     void removeLoop();
-    
     void createLoop();
     void deleteNode(int);
     void removeDup();
@@ -79,22 +89,17 @@ class LL {
     void removeDupSorted();
     void intersection();
     void swapNodeWithoutSwappingData();
+    // T nodeAt(int pos) {
+    //     if(!root) return NILL;
+    //     Node <T> * temp=root;
+    //     for(int i=0; i<pos; i++) temp=temp->next;
+    //     return temp->data; 
+    // }
 };
 
-int main() {
-    LL <int>* listA = new LL<int>();   
-    // listA->createList(false,20,false);
-    // listA->middle();
-    listA->insertSortRec(10);
-    listA->insertSortRec(5);
-    listA->insertSortRec(50);
-    listA->insertSortRec(10);
-    listA->insertSortRec(10);
-    listA->insertSortRec(10);
-    listA->insertSortRec(-10);
-    listA->display();
-    return 0;
-}
+// int main() {
+//     return 0;
+// }
 
 template<typename T>
 Node <T> *  LL<T>::insertEnd(T data, Node <T> * node,bool isStart) {
