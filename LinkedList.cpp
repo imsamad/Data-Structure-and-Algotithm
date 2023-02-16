@@ -36,7 +36,6 @@ class LL {
         Node <T> iNode=root;
         while(iNode->next) iNode=iNode->next;
         return iNode;
-
      }
     void createList(bool isToSort=false,int len=100, bool random=true) {
 
